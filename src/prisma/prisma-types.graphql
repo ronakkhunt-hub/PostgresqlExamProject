@@ -1,0 +1,137 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+scalar DateTime
+scalar Object
+scalar Null
+
+# All Mutations ///////////////////////////
+type Mutation {
+  createStudent(data: StudentInput!): StudentResponse!
+  deleteStudent(id: String!):StudentResponse!
+  updateStudent(id: String!, data: UpdateStudentInput!): StudentResponse!
+  giveExam(id: String!, data: [GiveExamInput]): ExamResponse!
+
+  createTeacher(data: TeacherInput!): TeacherResponse!
+  deleteTeacher(id: String!): TeacherResponse!
+  updateTeacher(id: String!, data: UpdateTeacherInput!): TeacherResponse
+
+  createQuestion(data: QuestionInput!): QuestionResponse!
+  deleteQuestion(id: String!): QuestionResponse!
+  updateQuestion(id: String!, data: UpdateQuestionInput!): QuestionResponse
+}
+
+# All Query /////////////////////////////////
+type Query{
+  findAllStudent(filter:CommonFilterInput): StudentResponse
+  findOneStudent(id: String!): StudentResponse!
+  getExamQuestion(filter: CommonFilterInput): QuestionResponse!
+
+  findAllTeacher(filter:CommonFilterInput): TeacherResponse!
+  findOneTeacher(id: String!): TeacherResponse!
+
+  findAllQuestion(filter:CommonFilterInput): QuestionResponse!
+  findOneQuestion(id: String!): QuestionResponse!
+}
+
+# All Inputs ////////////////////////////////
+input CommonFilterInput {
+  skip: Int
+  take: Int
+  cursor: Object
+  where: Object
+  orderBy: Object
+}
+input GiveExamInput {
+   questionId: String
+   correct: String
+  }
+
+input StudentInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UpdateStudentInput {
+  username: String!
+  email: String!
+}
+
+input TeacherInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UpdateTeacherInput {
+  username: String!
+  email: String!
+}
+
+input QuestionInput {
+  question: String!
+  choice1: String!
+  choice2: String!
+  choice3: String!
+  choice4: String!
+  correct: String!
+}
+
+input UpdateQuestionInput {
+  question: String!
+  choice1: String!
+  choice2: String!
+  choice3: String!
+  choice4: String!
+  correct: String!
+}
+
+
+# All Model Type ///////////////////////// 
+type Student{
+  id: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  username: String
+  email: String
+}
+
+type Teacher{
+  id: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  username: String
+  email: String
+}
+
+type Question{
+  id: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  question: String
+  choice1: String
+  choice2: String
+  choice3: String
+  choice4: String
+}
+
+# All Response Types ///////////////////
+type StudentResponse {
+  message:String
+  data: Student
+}
+
+type TeacherResponse {
+  message:String
+  data: Teacher
+}
+
+type QuestionResponse {
+  message:String
+  data: Question
+}
+
+type ExamResponse{
+  message: String
+}
